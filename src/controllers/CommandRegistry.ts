@@ -26,9 +26,15 @@ export class CommandRegistry implements ICommandRegistry {
     }
 
     private registerDefaultCommands(): void {
-        const { addTask, updateTask, deleteTask, listTasks } =
-            require("../views/TaskView")
-                .views as typeof import("../views/TaskView").views;
+        const {
+            addTask,
+            updateTask,
+            deleteTask,
+            listTasks,
+            markInProgress,
+            markDone,
+        } = require("../views/TaskView")
+            .views as typeof import("../views/TaskView").views;
 
         this.register("add", ["validate", "create-task", "print"], addTask);
         this.register(
@@ -42,6 +48,16 @@ export class CommandRegistry implements ICommandRegistry {
             deleteTask,
         );
         this.register("list", ["validate", "execute", "print"], listTasks);
+        this.register(
+            "mark-in-progress",
+            ["validate", "mark-in-progress", "print"],
+            markInProgress,
+        );
+        this.register(
+            "mark-done",
+            ["validate", "mark-done", "print"],
+            markDone,
+        );
     }
 
     register(

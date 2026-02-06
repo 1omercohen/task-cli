@@ -21,6 +21,8 @@ export const ACTIONS = Object.freeze({
     UPDATE: "update",
     DELETE: "delete",
     LIST: "list",
+    MARK_IN_PROGRESS: "mark-in-progress",
+    MARK_DONE: "mark-done",
 } as const);
 
 export type ActionType = (typeof ACTIONS)[keyof typeof ACTIONS];
@@ -30,15 +32,7 @@ export const TASKS_PATH = "./tasks.json";
 export const VALIDATION_RULES: Readonly<
     Record<ActionType, readonly ValidationRule[]>
 > = Object.freeze({
-    [ACTIONS.ADD]: Object.freeze([
-        { name: "description", required: true },
-        {
-            name: "status",
-            required: false,
-            options: STATUS_OPTIONS,
-            default: STATUS.TODO,
-        },
-    ]),
+    [ACTIONS.ADD]: Object.freeze([{ name: "description", required: true }]),
     [ACTIONS.UPDATE]: Object.freeze([
         { name: "id", required: true },
         { name: "description", required: false },
@@ -53,6 +47,8 @@ export const VALIDATION_RULES: Readonly<
             default: "all",
         },
     ]),
+    [ACTIONS.MARK_IN_PROGRESS]: Object.freeze([{ name: "id", required: true }]),
+    [ACTIONS.MARK_DONE]: Object.freeze([{ name: "id", required: true }]),
 });
 
 export const PIPELINES: Readonly<Record<ActionType, readonly string[]>> =
@@ -61,6 +57,12 @@ export const PIPELINES: Readonly<Record<ActionType, readonly string[]>> =
         [ACTIONS.UPDATE]: Object.freeze(["validate", "update-task", "print"]),
         [ACTIONS.DELETE]: Object.freeze(["validate", "delete-task", "print"]),
         [ACTIONS.LIST]: Object.freeze(["validate", "execute", "print"]),
+        [ACTIONS.MARK_IN_PROGRESS]: Object.freeze([
+            "validate",
+            "mark-in-progress",
+            "print",
+        ]),
+        [ACTIONS.MARK_DONE]: Object.freeze(["validate", "mark-done", "print"]),
     });
 
 export const STEP_TO_HANDLER = Object.freeze({
@@ -68,6 +70,8 @@ export const STEP_TO_HANDLER = Object.freeze({
     "update-task": "updateTask",
     "delete-task": "deleteTask",
     execute: "execute",
+    "mark-in-progress": "markInProgress",
+    "mark-done": "markDone",
 } as const);
 
 export type StepHandler =

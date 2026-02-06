@@ -7,11 +7,10 @@ export class CommandController implements ITaskCommandController {
 
     async createTask(params: Readonly<Record<string, unknown>>): Promise<Task> {
         const description = params.description as string;
-        const status = (params.status as TaskStatus) ?? TaskStatus.TODO;
 
         return this.db.addTask({
             description,
-            status,
+            status: TaskStatus.TODO,
         });
     }
 
@@ -48,5 +47,17 @@ export class CommandController implements ITaskCommandController {
         }
 
         return this.db.getByStatus(status);
+    }
+
+    async markInProgress(
+        params: Readonly<Record<string, unknown>>,
+    ): Promise<Task> {
+        const id = params.id as string;
+        return this.db.updateTask(id, { status: TaskStatus.IN_PROGRESS });
+    }
+
+    async markDone(params: Readonly<Record<string, unknown>>): Promise<Task> {
+        const id = params.id as string;
+        return this.db.updateTask(id, { status: TaskStatus.DONE });
     }
 }

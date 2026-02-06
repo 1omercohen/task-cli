@@ -41,6 +41,18 @@ const listTasks: ViewHandler = (result: unknown) => {
     console.log(`\nTotal: ${tasks.length}`);
 };
 
+const markInProgress: ViewHandler = (result: unknown) => {
+    const task = result as Task;
+    console.log(`${ICONS.SUCCESS} Task marked as in progress.`);
+    console.log(formatTask(task));
+};
+
+const markDone: ViewHandler = (result: unknown) => {
+    const task = result as Task;
+    console.log(`${ICONS.SUCCESS} Task marked as done.`);
+    console.log(formatTask(task));
+};
+
 const error = (message: string): void => {
     console.error(`${ICONS.ERROR} Error: ${message}`);
 };
@@ -48,12 +60,14 @@ const error = (message: string): void => {
 const help = (): void => {
     console.log("Usage: npm start -- <action> [options]\n");
     console.log("Available actions:");
-    console.log("  add       --description <text> [--status <status>]");
+    console.log("  add              --description <text>");
     console.log(
-        "  update    --id <id> [--description <text>] [--status <status>]",
+        "  update           --id <id> [--description <text>] [--status <status>]",
     );
-    console.log("  delete    --id <id>");
-    console.log("  list      [--status <status>]\n");
+    console.log("  delete           --id <id>");
+    console.log("  list             [--status <status>]");
+    console.log("  mark-in-progress --id <id>");
+    console.log("  mark-done        --id <id>\n");
     console.log("Status options: todo, in progress, done");
 };
 
@@ -62,6 +76,8 @@ export const views = Object.freeze({
     updateTask,
     deleteTask,
     listTasks,
+    markInProgress,
+    markDone,
     error,
     help,
     formatTask,
