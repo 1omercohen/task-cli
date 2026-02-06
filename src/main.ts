@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { parseToJson } from "./utils";
 import { TaskDB } from "./models/TaskDB";
 import { CommandController } from "./controllers/CommandController";
