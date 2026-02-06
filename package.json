@@ -1,0 +1,19 @@
+{
+    "name": "task-cli",
+    "version": "2.0.0",
+    "description": "Production-grade Task CLI with TypeScript and Design Patterns",
+    "main": "dist/main.js",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/main.js",
+        "dev": "ts-node src/main.ts",
+        "dev:build": "npm run build && npm start",
+        "watch": "tsc --watch"
+    },
+    "devDependencies": {
+        "@types/node": "^20.19.32",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.9.3"
+    },
+    "license": "MIT"
+}
