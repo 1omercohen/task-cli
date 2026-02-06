@@ -261,6 +261,11 @@ MIT
 
 Created as a production-grade example of enterprise-quality CLI tooling with TypeScript and design patterns.
 
+## Resources
+
+This project implements the [Task Tracker](https://roadmap.sh/projects/task-tracker) from [roadmap.sh](https://roadmap.sh) with enterprise-grade architecture and design patterns.
+
 ---
 
-**GitHub:** [https://github.com/1omercohen/task-cli](https://github.com/1omercohen/task-cli)
+**GitHub:** [https://github.com/1omercohen/task-cli](https://github.com/1omercohen/task-cli)  
+**Project Reference:** [https://roadmap.sh/projects/task-tracker](https://roadmap.sh/projects/task-tracker)
